@@ -35,13 +35,11 @@ function App() {
       <label htmlFor="search">Search : </label>
       &ensp; <input id="search" type="text" />
       <hr />
-      {list.map((item) => {
-        return (
-          <li className="list" key={item.objectId}>
-            <a href={item.url}>{item.title}</a> | {item.author} | {item.points}
-          </li>
-        );
-      })}
+      {list.map((item) => (
+        <li className="list" key={item.objectId}>
+          <a href={item.url}>{item.title}</a> | {item.author} | {item.points}
+        </li>
+      ))}
     </div>
   );
 }
