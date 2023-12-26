@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import List from "./components/list/list.jsx";
 import Search from "./components/search/Search.jsx";
 
@@ -59,22 +59,36 @@ function useSemiPersistentState(key, initialState) {
   useEffect(() => {
     localStorage.setItem(key, value);
   }, [value]);
-  return [value, setValue]
+  return [value, setValue];
+}
+
+function storiesReducer(state, action) {
+  if (action.type === "SET_STORIES") {
+    return action.payload;
+  } else {
+    throw new Error();
+  }
 }
 
 function App() {
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search","Re");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "Re");
 
-  const [stories, setStories] = useState(initialStories);
+  const [stories, dispatchStories] = useReducer(storiesReducer, []);
 
-  function handleRemoveStory(item){
-    const newStories = stories.filter((story) =>item.objectID !== story.objectId);
-    setStories(newStories);
-  }
+  useEffect(() => {
+    dispatchStories({ type: "ET_STORIES", payload: initialStories });
+  }, []);
 
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  function handleRemoveStory(item) {
+    const newStories = stories.filter(
+      (story) => item.objectID !== story.objectId
+    );
+    dispatchStories({ type: "SET_STORIES", payload: newStories });
+  }
 
   return (
     <div className="container">
@@ -83,7 +97,7 @@ function App() {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </h3>
       <hr />
-      <List list={searchedStories} onRemoveItem={handleRemoveStory}/>
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div>
   );
 }
