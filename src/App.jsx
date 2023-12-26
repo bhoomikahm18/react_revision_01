@@ -11,7 +11,7 @@ import Search from "./components/search/Search.jsx";
 // function getTitle(title){
 //   return title;
 // }
-const stories = [
+const initialStories = [
   {
     title: "React",
     url: "https://react.js.org/",
@@ -64,6 +64,13 @@ function useSemiPersistentState(key, initialState) {
 
 function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search","Re");
+
+  const [stories, setStories] = useState(initialStories);
+
+  function handleRemoveStory(item){
+    const newStories = stories.filter((story) =>item.objectID !== story.objectId);
+    setStories(newStories);
+  }
 
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
