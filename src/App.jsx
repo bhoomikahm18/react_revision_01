@@ -83,7 +83,7 @@ function App() {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </h3>
       <hr />
-      <List list={searchedStories} />
+      <List list={searchedStories} onRemoveItem={handleRemoveStory}/>
     </div>
   );
 }
