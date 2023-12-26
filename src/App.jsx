@@ -57,9 +57,9 @@ const stories = [
 function App() {
   return (
     <div className="container">
-      <h1>
+      <h3>
         My Hacker Stories : <Search />
-      </h1>
+      </h3>
       <hr />
       <List list={stories} />
     </div>
