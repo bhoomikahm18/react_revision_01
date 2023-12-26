@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import List from "./components/list/list.jsx";
 import Search from "./components/search/Search.jsx";
 
@@ -55,8 +55,14 @@ const stories = [
 ];
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("Re");
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("search") || "rea"
+  );
 
+  useEffect(() => {
+    localStorage.setItem('search', searchTerm);
+  }, [searchTerm]);
+  
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
