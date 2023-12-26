@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import List from "./components/list/list.jsx";
 import Search from "./components/search/Search.jsx";
 
@@ -55,10 +55,12 @@ const stories = [
 ];
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className="container">
       <h3>
-        My Hacker Stories : <Search />
+        My Hacker Stories : <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       </h3>
       <hr />
       <List list={stories} />
