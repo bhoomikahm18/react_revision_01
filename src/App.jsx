@@ -63,10 +63,14 @@ function useSemiPersistentState(key, initialState) {
 }
 
 function storiesReducer(state, action) {
-  if (action.type === "SET_STORIES") {
-    return action.payload;
-  } else {
-    throw new Error();
+  switch (action.type) {
+    case "SET_STORIES":
+      return action.payload;
+    case "REMOVE_STORY":
+      return action.filter(
+        (story) => action.payload.objectId !== story.objectId
+      );
+      default: throw new Error();
   }
 }
 
@@ -84,10 +88,10 @@ function App() {
   );
 
   function handleRemoveStory(item) {
-    const newStories = stories.filter(
-      (story) => item.objectID !== story.objectId
-    );
-    dispatchStories({ type: "SET_STORIES", payload: newStories });
+    // const newStories = stories.filter(
+    //   (story) => item.objectId !== story.objectId
+    // );
+    dispatchStories({ type: "SET_STORIES", payload: item });
   }
 
   return (
