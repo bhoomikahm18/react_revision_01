@@ -37,7 +37,9 @@ function App() {
       <hr />
       {list.map((item) => {
         return (
-          <li className="list" key={item.objectId}>{item.title}</li>
+          <li className="list" key={item.objectId}>
+            <a href={item.url}>{item.title}</a> | {item.author} | {item.points}
+          </li>
         );
       })}
     </div>
