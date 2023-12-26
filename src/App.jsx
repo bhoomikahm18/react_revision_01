@@ -57,13 +57,18 @@ const stories = [
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const searchedStories = stories.filter((story) =>
+    story.title.includes(searchTerm)
+  );
+
   return (
     <div className="container">
       <h3>
-        My Hacker Stories : <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+        My Hacker Stories :{" "}
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </h3>
       <hr />
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   );
 }
