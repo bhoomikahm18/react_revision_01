@@ -54,15 +54,17 @@ const stories = [
   },
 ];
 
-function App() {
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem("search") || "rea"
-  );
-
+function useSemiPersistentState(key, initialState) {
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
   useEffect(() => {
-    localStorage.setItem('search', searchTerm);
-  }, [searchTerm]);
-  
+    localStorage.setItem(key, value);
+  }, [value]);
+  return [value, setValue]
+}
+
+function App() {
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search","Re");
+
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
