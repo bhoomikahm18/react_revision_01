@@ -1,5 +1,7 @@
 import "./App.css";
 import React from "react";
+import List from "./components/list/list.jsx";
+import Search from "./components/search/Search.jsx";
 
 // const welcome = {
 //   greeting: "Hey",
@@ -31,15 +33,11 @@ const list = [
 function App() {
   return (
     <div className="container">
-      <h1>My Hacker Stories</h1>
-      <label htmlFor="search">Search : </label>
-      &ensp; <input id="search" type="text" />
+      <h1>
+        My Hacker Stories : <Search />
+      </h1>
       <hr />
-      {list.map((item) => (
-        <li className="list" key={item.objectId}>
-          <a href={item.url}>{item.title}</a> | {item.author} | {item.points}
-        </li>
-      ))}
+      <List parcel={list} />
     </div>
   );
 }
