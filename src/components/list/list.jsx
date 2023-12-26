@@ -6,7 +6,7 @@ export default function list(props) {
     <div>
       {props.parcel.map((item) => (
         <li className="list" key={item.objectId}>
-          <a href={item.url}>{item.title}</a> | {item.author} | {item.points}
+          <a href={item.url}>{item.title}</a> | {item.author} | Points: {item.points}
         </li>
       ))}
     </div>
