@@ -10,9 +10,7 @@ export default function list(props) {
           {item.points}
           <button
             style={{ fontSize: "1.2rem" }}
-            onClick={() => {
-              props.onRemoveItem(item);
-            }}
+            onClick={props.onRemoveItem.bind(null, item)}
           >
             Dismiss
           </button>
