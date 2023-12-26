@@ -30,14 +30,14 @@ const list = [
 
 function App() {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="container">
       <h1>My Hacker Stories</h1>
       <label htmlFor="search">Search : </label>
       &ensp; <input id="search" type="text" />
       <hr />
       {list.map((item) => {
         return (
-          <li style={{ fontSize: "2rem", fontWeight: "bold" }}>{item.title}</li>
+          <li className="list" key={item.objectId}>{item.title}</li>
         );
       })}
     </div>
