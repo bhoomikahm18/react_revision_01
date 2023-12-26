@@ -11,7 +11,7 @@ import Search from "./components/search/Search.jsx";
 // function getTitle(title){
 //   return title;
 // }
-const list = [
+const stories = [
   {
     title: "React",
     url: "https://react.js.org/",
@@ -61,7 +61,7 @@ function App() {
         My Hacker Stories : <Search />
       </h1>
       <hr />
-      <List parcel={list} />
+      <List list={stories} />
     </div>
   );
 }
